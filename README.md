@@ -1,6 +1,7 @@
 # rbac-helm-demo
 
 ```shell
+cd rbac-demo
 
 # create your namspaces first
 kubectl create namespace dev
