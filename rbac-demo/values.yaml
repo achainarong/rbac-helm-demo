@@ -3,20 +3,21 @@ namespaces:
   - staging
   - prod
 
+# creates the role for the respective namespace
+templates:
+  - name: admin
+    namespaces: 
+      - dev
+      - staging
+      - prod
+  - name: dev
+    namespaces: 
+    - dev
+  - name: guest
+    namespaces: 
+    - dev
+
 roles:
-  # creates the role for the respective namespace
-  templates:
-    - name: admin
-      namespaces: 
-        - dev
-        - staging
-        - prod
-    - name: dev
-      namespaces: 
-      - dev
-    - name: guest
-      namespaces: 
-      - dev
   # rolebindung to the user and the role
   admin:
     - name: admin1

@@ -1,4 +1,4 @@
-{{- range .Values.roles.templates }}
+{{- range .Values.templates }}
   {{- $roleName := .name }}
   {{- range .namespaces }}
 ---
