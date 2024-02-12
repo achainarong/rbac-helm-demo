@@ -10,37 +10,12 @@ templates:
       - dev
       - staging
       - prod
-  - name: dev
-    namespaces: 
-    - dev
-  - name: guest
-    namespaces: 
-    - dev
 
 roles:
   # rolebindung to the user and the role
   admin:
-    - name: admin1
+    - name: namespace-admin
       namespaces:
         - dev
         - staging
         - prod
-    - name: admin2
-      namespaces: 
-        - dev
-        - staging
-        - prod
-  dev:
-    - name: dev1
-      namespaces:
-        - dev
-    - name: dev2
-      namespaces: 
-        - dev
-  guest:
-    - name: guest1
-      namespaces: 
-        - dev
-    - name: guest2
-      namespaces: 
-        - dev

@@ -1,17 +1,36 @@
 {{- range $role, $users := .Values.roles }}
 {{- range $users }}
-{{- $userName := .name }}
+{{- $serviceAccountName := .name }}
 {{- range .namespaces }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $serviceAccountName }}
+  namespace: {{ . }}
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ $serviceAccountName }}-token
+  namespace: {{ . }}
+  annotations:
+    kubernetes.io/service-account.name: {{ $serviceAccountName }} 
+type: kubernetes.io/service-account-token
+
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ $userName }}-{{ $role }}-binding-{{ . }}
+  name: {{ $serviceAccountName }}-{{ $role }}-binding-{{ . }}
   namespace: {{ . }}
 subjects:
-- kind: User
-  name: {{ $userName }}
-  apiGroup: rbac.authorization.k8s.io
+- kind: ServiceAccount
+  name: {{ $serviceAccountName }}
+  namespace: {{ . }}
+  apiGroup: ""
 roleRef:
   kind: Role
   name: {{ $role }}-role

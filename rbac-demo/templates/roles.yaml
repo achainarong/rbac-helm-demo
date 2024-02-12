@@ -8,18 +8,8 @@ metadata:
   name: {{ $roleName }}-role
   namespace: {{ . }}
 rules:
-  {{- if eq $roleName "guest" }}
-  - apiGroups: [""]
-    resources: ["*"]
-    verbs: ["get", "list", "watch"]
-  {{- else if eq $roleName "dev" }}
-  - apiGroups: [""]
-    resources: ["*"]
-    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
-  {{- else if eq $roleName "admin" }}
   - apiGroups: ["*"]
     resources: ["*"]
     verbs: ["*"]
-  {{- end }}
   {{- end }}
 {{- end }}
